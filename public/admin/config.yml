@@ -2,7 +2,7 @@ backend:
   name: github
   repo: khudeengineer/khudeshop # আপনার রিপোজিটরির নাম
   branch: main
-  base_url: https://github-oauth-gateway.khudeengineer.workers.dev
+  base_url: https://auth.khudeengineer.workers.dev
  # আপনার ওয়ার্কারের লিংক
 
 # Enable local testing
