@@ -27,13 +27,21 @@
         color: white !important;
       }
       
-      /* Force all header links, buttons, and icons to be white */
-      #nc-root header a, 
-      #nc-root header button,
-      #nc-root header span,
-      #nc-root header svg {
+      /* Force appBar links and icons to be white */
+      #nc-root [class*="AppHeader-appBar"] a, 
+      #nc-root [class*="AppHeader-appBar"] svg {
         color: white !important;
         fill: white !important;
+      }
+      
+      /* Ensure user name and other header spans are also white but only in the bar */
+      #nc-root [class*="AppHeader-appBar"] span {
+        color: white !important;
+      }
+
+      /* Fix Dropdown/Logout menu colors (ensure they're NOT white if on light background) */
+      [class*="DropdownButton"], [class*="MenuItem"] {
+        color: #0f172a !important; /* Dark color for visibility */
       }
 
       /* Active Link highlight */
