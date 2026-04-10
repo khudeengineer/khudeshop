@@ -1,7 +1,9 @@
 backend:
   name: github
-  repo: your-username/your-repo-name # Update this with your actual repo name
-  branch: main # Change this if your default branch is different
+  repo: khudeengineer/khudeshop # আপনার রিপোজিটরির নাম
+  branch: main
+  base_url: https://github-oauth-gateway.khudeengineer.workers.dev
+ # আপনার ওয়ার্কারের লিংক
 
 # Enable local testing
 local_backend: true
