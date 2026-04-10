@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="যোগাযোগ" description="আমাদের সাথে যোগাযোগ করুন। আপনার যেকোনো প্রশ্ন বা অনুসন্ধানের জন্য আমরা সর্বদা প্রস্তুত।">
+  <section class="py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-4 text-slate-900 dark:text-white">আমাদের সাথে যোগাযোগ করুন</h1>
+        <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+          আপনার যেকোনো প্রয়োজন বা রোবটিক্স সংক্রান্ত যেকোনো প্রশ্নের জন্য সরাসরি যোগাযোগ করুন।
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Contact Cards -->
+        <div class="lg:col-span-1 space-y-6">
+          <div class="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700 hover-lift">
+            <div class="bg-brand-blue/10 dark:bg-brand-blue/20 w-12 h-12 rounded-2xl flex items-center justify-center text-brand-blue mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+            </div>
+            <h3 class="text-xl font-bold mb-2 dark:text-white">ফোন করুন</h3>
+            <p class="text-slate-600 dark:text-slate-400">+৮৮০ ১৭৩৬০০৯৩২৪</p>
+          </div>
+
+          <div class="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700 hover-lift">
+            <div class="bg-brand-green/10 dark:bg-brand-green/20 w-12 h-12 rounded-2xl flex items-center justify-center text-brand-green mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+            </div>
+            <h3 class="text-xl font-bold mb-2 dark:text-white">ইমেইল করুন</h3>
+            <p class="text-slate-600 dark:text-slate-400">hello@khudeengineer.com</p>
+          </div>
+
+          <div class="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700 hover-lift">
+            <div class="bg-brand-blue/10 dark:bg-brand-blue/20 w-12 h-12 rounded-2xl flex items-center justify-center text-brand-blue mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            </div>
+            <h3 class="text-xl font-bold mb-2 dark:text-white">ঠিকানা</h3>
+            <p class="text-slate-600 dark:text-slate-400">ঢাকা, বাংলাদেশ</p>
+          </div>
+        </div>
+
+        <!-- Contact Form / WhatsApp Redirect -->
+        <div class="lg:col-span-2">
+          <div class="bg-white dark:bg-slate-800 p-10 rounded-3xl shadow-premium border border-slate-100 dark:border-slate-700">
+            <h3 class="text-2xl font-bold mb-8 text-slate-900 dark:text-white">দ্রুত মেসেজ পাঠান</h3>
+            <div class="space-y-6">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">আপনার নাম</label>
+                  <input type="text" id="contact-name" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue focus:border-transparent transition-all outline-none" placeholder="নাম লিখুন" />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">বিষয়</label>
+                  <input type="text" id="contact-subject" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue focus:border-transparent transition-all outline-none" placeholder="বিষয়ের নাম" />
+                </div>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">বার্তা</label>
+                <textarea id="contact-message" rows="4" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue focus:border-transparent transition-all outline-none" placeholder="আপনার বার্তাটি লিখুন"></textarea>
+              </div>
+              <button id="send-wp-inquiry" class="w-full bg-brand-blue hover:bg-brand-blue-hover text-white font-bold py-4 px-6 rounded-xl transition-all flex items-center justify-center text-lg gap-2 shadow-lg hover:shadow-xl hover:scale-[1.02]">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.964 9.964 0 001.333 4.993L2 22l5.233-1.237a9.994 9.994 0 004.779 1.217h.004c5.505 0 9.988-4.478 9.989-9.984 0-2.669-1.037-5.176-2.926-7.066A9.92 9.92 0 0012.012 2zm5.836 14.161c-.244.686-1.428 1.341-1.954 1.4-2.825.32-6.57-2.126-8.232-4.22-.163-.207-1.954-2.614-1.954-4.994 0-2.38 1.246-3.565 1.688-4.007.442-.442 1.212-.52 1.66-.54h.346c.358 0 .84.053 1.156.842.348.868 1.2 3.023 1.3 3.256.103.23.187.525.04.821-.144.298-.22.483-.437.733-.217.25-.455.549-.652.75-.218.225-.445.474-.194.908.252.434 1.121 1.85 2.404 2.997 1.656 1.48 3.056 1.942 3.504 2.152.449.21.71.166.974-.112.264-.277 1.144-1.328 1.448-1.782.304-.455.607-.379 1.015-.227.408.152 2.58 1.214 3.021 1.436.442.221.737.333.844.52.107.185.107 1.066-.137 1.75z"/></svg>
+                সরাসরি WhatsApp-এ ইনকোয়ারি করুন
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const btn = document.getElementById('send-wp-inquiry');
+    if (btn) {
+      btn.addEventListener('click', () => {
+        const name = (document.getElementById('contact-name') as HTMLInputElement).value;
+        const subject = (document.getElementById('contact-subject') as HTMLInputElement).value;
+        const message = (document.getElementById('contact-message') as HTMLTextAreaElement).value;
+        
+        if (!name || !message) {
+          alert('দয়া করে আপনার নাম এবং মেসেজটি লিখুন।');
+          return;
+        }
+
+        const PHONE_NUMBER = "8801736009324";
+        const text = `আসসালামু আলাইকুম,\nআমি ${name} বলছি।\nবিষয়: ${subject}\n\nমেসেজ: ${message}`;
+        const url = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(text)}`;
+        window.open(url, '_blank');
+      });
+    }
+  </script>
+</BaseLayout>

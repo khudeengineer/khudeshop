@@ -1,0 +1,95 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="আপনার শপিং কার্ট">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+    <div class="flex items-center gap-4 mb-12 animate-in fade-in slide-in-from-top duration-500">
+      <div class="w-12 h-12 bg-brand-blue rounded-2xl flex items-center justify-center text-white">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
+      </div>
+      <h1 class="text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">শপিং কার্ট</h1>
+    </div>
+
+    <div id="cart-container" class="animate-in fade-in duration-700 delay-200">
+      <!-- Loading state -->
+      <div class="flex flex-col items-center justify-center py-32 text-slate-400 dark:text-slate-500">
+        <svg class="animate-spin h-12 w-12 mb-6 text-brand-blue" viewBox="0 0 24 24">
+           <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+           <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        <p class="font-bold text-lg dark:text-slate-300">আপনার প্রোডাক্টস লোড হচ্ছে...</p>
+      </div>
+    </div>
+
+    <!-- Empty Cart Template -->
+    <template id="empty-cart-tpl">
+      <div class="text-center py-32 bg-white dark:bg-slate-800 rounded-[3rem] shadow-sm border border-slate-100 dark:border-slate-700 flex flex-col items-center">
+        <div class="w-32 h-32 bg-slate-50 dark:bg-slate-900 rounded-full flex items-center justify-center text-6xl mb-8 animate-bounce">🛒</div>
+        <h2 class="text-3xl font-black text-slate-900 dark:text-white mb-4 tracking-tight">আপনার কার্টটি বর্তমানে খালি!</h2>
+        <p class="text-slate-500 dark:text-slate-400 max-w-sm mx-auto mb-10 font-medium">আমাদের শপ থেকে চমৎকার কিছু রোবটিক্স এবং ইলেকট্রনিক্স কিটস খুঁজে নিন।</p>
+        <a href="/products" class="inline-flex items-center gap-2 bg-brand-blue text-white font-black px-12 py-5 rounded-2xl hover:bg-brand-blue-hover transition-all hover:scale-105 shadow-xl shadow-brand-blue/20">
+          প্রোডাক্টস দেখুন <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+        </a>
+      </div>
+    </template>
+
+    <!-- Cart Layout Template -->
+    <template id="cart-layout-tpl">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div class="lg:col-span-2 space-y-6" id="cart-items-list">
+          <!-- Items hydrated by JS -->
+        </div>
+        
+        <div class="lg:col-span-1">
+          <div class="bg-white dark:bg-slate-800 p-8 rounded-[2.5rem] shadow-premium border border-slate-100 dark:border-slate-700 sticky top-28">
+            <h3 class="text-2xl font-black text-slate-900 dark:text-white mb-8 tracking-tight">অর্ডার সামারি</h3>
+            <div class="space-y-5 pb-8 border-b border-slate-100 dark:border-slate-700">
+              <div class="flex justify-between items-center text-slate-600 dark:text-slate-400 font-bold">
+                <span>মোট প্রোডাক্ট</span>
+                <span id="cart-summary-count" class="bg-slate-100 dark:bg-slate-900 px-3 py-1 rounded-full text-brand-blue">0</span>
+              </div>
+              <div class="flex justify-between items-center text-slate-900 dark:text-white font-black text-2xl pt-2">
+                <span>সর্বমোট</span>
+                <span class="text-brand-blue">৳ <span id="cart-summary-total">0</span></span>
+              </div>
+            </div>
+            <div class="pt-8 space-y-4">
+              <button id="checkout-wp-btn" class="w-full bg-brand-green hover:bg-brand-green-hover text-white font-black py-5 px-6 rounded-2xl transition-all flex items-center justify-center text-xl shadow-xl shadow-brand-green/20 hover:scale-[1.02] transform active:scale-95 group">
+                 <svg class="w-7 h-7 mr-3 group-hover:rotate-12 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.964 9.964 0 001.333 4.993L2 22l5.233-1.237a9.994 9.994 0 004.779 1.217h.004c5.505 0 9.988-4.478 9.989-9.984 0-2.669-1.037-5.176-2.926-7.066A9.92 9.92 0 0012.012 2zm5.836 14.161c-.244.686-1.428 1.341-1.954 1.4-2.825.32-6.57-2.126-8.232-4.22-.163-.207-1.954-2.614-1.954-4.994 0-2.38 1.246-3.565 1.688-4.007.442-.442 1.212-.52 1.66-.54h.346c.358 0 .84.053 1.156.842.348.868 1.2 3.023 1.3 3.256.103.23.187.525.04.821-.144.298-.22.483-.437.733-.217.25-.455.549-.652.75-.218.225-.445.474-.194.908.252.434 1.121 1.85 2.404 2.997 1.656 1.48 3.056 1.942 3.504 2.152.449.21.71.166.974-.112.264-.277 1.144-1.328 1.448-1.782.304-.455.607-.379 1.015-.227.408.152 2.58 1.214 3.021 1.436.442.221.737.333.844.52.107.185.107 1.066-.137 1.75z"/></svg>
+                 WhatsApp-এ অর্ডার দিন
+              </button>
+              <a href="/products" class="flex items-center justify-center gap-2 text-slate-500 font-bold hover:text-brand-blue transition-colors group">
+                <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"></path></svg>
+                কেনাকাটা চালিয়ে যান
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
+
+    <!-- Cart Item Template -->
+    <template id="cart-item-tpl">
+      <div class="cart-item bg-white dark:bg-slate-800 p-6 rounded-[2rem] shadow-sm border border-slate-100 dark:border-slate-700 flex flex-col sm:flex-row items-center gap-6 group hover:border-brand-blue/30 transition-all">
+        <div class="w-24 h-24 sm:w-28 sm:h-28 flex-shrink-0 bg-slate-50 dark:bg-slate-900 rounded-2xl overflow-hidden">
+          <img class="item-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="" alt="" />
+        </div>
+        <div class="flex-grow text-center sm:text-left">
+          <h4 class="item-title font-black text-xl text-slate-900 dark:text-white mb-2"></h4>
+          <div class="text-brand-blue font-black text-lg">৳ <span class="item-price"></span></div>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="flex items-center bg-slate-100 dark:bg-slate-900 rounded-2xl p-1 gap-1">
+             <button class="btn-qty-dec w-10 h-10 flex items-center justify-center bg-white dark:bg-slate-800 rounded-xl shadow-sm text-slate-600 dark:text-slate-300 hover:text-brand-blue transition-colors font-black">-</button>
+             <span class="item-qty px-4 font-black text-slate-900 dark:text-white text-lg">1</span>
+             <button class="btn-qty-inc w-10 h-10 flex items-center justify-center bg-white dark:bg-slate-800 rounded-xl shadow-sm text-slate-600 dark:text-slate-300 hover:text-brand-blue transition-colors font-black">+</button>
+          </div>
+          <button class="btn-remove w-12 h-12 flex items-center justify-center bg-red-50 text-red-400 hover:bg-red-500 hover:text-white rounded-2xl transition-all duration-300" title="মুছে ফেলুন">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+          </button>
+        </div>
+      </div>
+    </template>
+  </div>
+</BaseLayout>

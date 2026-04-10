@@ -1,0 +1,77 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  product: CollectionEntry<'products'>;
+}
+
+const { product } = Astro.props;
+const { id, data } = product;
+---
+
+<div class="group bg-white dark:bg-slate-800 rounded-3xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-700 hover:shadow-premium transition-all duration-500 flex flex-col h-full relative">
+  <!-- Badges -->
+  <div class="absolute top-4 left-4 z-10 flex flex-col gap-2">
+    {data.isOffer && (
+      <span class="bg-brand-green text-white text-[10px] font-bold px-3 py-1.5 rounded-full shadow-sm uppercase tracking-wider">অফার</span>
+    )}
+    {data.isTop && (
+      <span class="bg-brand-blue text-white text-[10px] font-bold px-3 py-1.5 rounded-full shadow-sm uppercase tracking-wider">টপ</span>
+    )}
+  </div>
+
+  <!-- Image Container -->
+  <a href={`/product/${id}`} class="block aspect-square overflow-hidden bg-slate-50 dark:bg-slate-900 relative">
+    <img 
+      src={data.image} 
+      alt={data.title} 
+      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+    />
+    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500"></div>
+  </a>
+
+  <!-- Content -->
+  <div class="p-6 flex flex-col flex-grow">
+    <div class="mb-2">
+      <span class="text-[11px] font-bold text-brand-blue dark:text-brand-blue uppercase tracking-widest bg-brand-blue/5 dark:bg-brand-blue/10 px-2 py-0.5 rounded-md">{data.category}</span>
+    </div>
+    
+    <a href={`/product/${id}`} class="block mb-3">
+      <h3 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-brand-blue transition-colors line-clamp-2 leading-snug">
+        {data.title}
+      </h3>
+    </a>
+
+    <div class="mt-auto flex items-center justify-between gap-4">
+      <div>
+        <span class="text-2xl font-black text-slate-900 dark:text-white">৳{data.price}</span>
+      </div>
+      
+      <div class="flex gap-2">
+        <button 
+          class="btn-add-cart w-11 h-11 bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-slate-100 rounded-xl flex items-center justify-center hover:bg-brand-blue hover:text-white transition-all duration-300 transform active:scale-95 group/btn"
+          data-id={id}
+          data-title={data.title}
+          data-price={data.price}
+          data-image={data.image}
+          title="কার্টে যোগ করুন"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+          </svg>
+        </button>
+
+        <button 
+          class="btn-buy-wp w-11 h-11 bg-brand-green/10 dark:bg-brand-green/20 text-brand-green rounded-xl flex items-center justify-center hover:bg-brand-green hover:text-white transition-all duration-300 transform active:scale-95"
+          data-title={data.title}
+          data-price={data.price}
+          title="সরাসরি অর্ডার দিন"
+        >
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.964 9.964 0 001.333 4.993L2 22l5.233-1.237a9.994 9.994 0 004.779 1.217h.004c5.505 0 9.988-4.478 9.989-9.984 0-2.669-1.037-5.176-2.926-7.066A9.92 9.92 0 0012.012 2zm5.836 14.161c-.244.686-1.428 1.341-1.954 1.4-2.825.32-6.57-2.126-8.232-4.22-.163-.207-1.954-2.614-1.954-4.994 0-2.38 1.246-3.565 1.688-4.007.442-.442 1.212-.52 1.66-.54h.346c.358 0 .84.053 1.156.842.348.868 1.2 3.023 1.3 3.256.103.23.187.525.04.821-.144.298-.22.483-.437.733-.217.25-.455.549-.652.75-.218.225-.445.474-.194.908.252.434 1.121 1.85 2.404 2.997 1.656 1.48 3.056 1.942 3.504 2.152.449.21.71.166.974-.112.264-.277 1.144-1.328 1.448-1.782.304-.455.607-.379 1.015-.227.408.152 2.58 1.214 3.021 1.436.442.221.737.333.844.52.107.185.107 1.066-.137 1.75z"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+</div>

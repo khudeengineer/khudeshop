@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Content Manager | ক্ষুদে ইঞ্জিনিয়ার একাডেমি</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;700&family=Outfit:wght@700&display=swap" rel="stylesheet">
+    <style>
+      /* Brand Customization for Decap CMS */
+      /* Use !important sparingly to override some internal styles */
+      :root {
+        --brand-blue: #2563eb;
+        --brand-green: #10b981;
+      }
+      
+      /* Login Page Branding */
+      #nc-root [class*="LoginButton"] {
+        background-color: var(--brand-blue) !important;
+        border-radius: 12px;
+      }
+      
+      /* Header Branding */
+      #nc-root header {
+        background-color: var(--brand-blue) !important;
+        color: white !important;
+      }
+      
+      /* Force all header links, buttons, and icons to be white */
+      #nc-root header a, 
+      #nc-root header button,
+      #nc-root header span,
+      #nc-root header svg {
+        color: white !important;
+        fill: white !important;
+      }
+
+      /* Active Link highlight */
+      #nc-root [class*="AppHeaderNavLink"][class*="buttonActive"] {
+        background-color: rgba(255, 255, 255, 0.2) !important;
+      }
+
+      /* Quick Add Button Background */
+      #nc-root [class*="AppHeaderQuickNewButton"] {
+        background-color: var(--brand-green) !important;
+        color: white !important;
+      }
+      
+      /* General UI Overrides */
+      body {
+        font-family: 'Hind Siliguri', sans-serif !important;
+      }
+      
+      [class*="ActionButton"] {
+        border-radius: 8px !important;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Decap CMS -->
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <script>
+      // Register Preview Styles
+      CMS.registerPreviewStyle("/admin/preview.css");
+      
+      // Register Product Preview Template
+      const ProductPreview = createClass({
+        render: function() {
+          const entry = this.props.entry;
+          const title = entry.getIn(['data', 'title']);
+          const price = entry.getIn(['data', 'price']);
+          const category = entry.getIn(['data', 'category']);
+          const isOffer = entry.getIn(['data', 'isOffer']);
+          const isTop = entry.getIn(['data', 'isTop']);
+          const image = this.props.getAsset(entry.getIn(['data', 'image']));
+          const body = this.props.widgetFor('body');
+
+          return h('div', { className: 'preview-container' },
+            h('div', { className: 'product-card' },
+              image ? h('img', { src: image.toString(), className: 'product-image' }) : h('div', { className: 'product-image', style: { background: '#f1f5f9'} }),
+              h('div', { className: 'product-content' },
+                h('p', { className: 'product-category' }, category || 'Category'),
+                h('h2', { className: 'product-title' }, title || 'Product Name'),
+                h('p', { className: 'product-price' }, '৳' + (price || '0')),
+                isOffer ? h('span', { className: 'badge' }, 'অফার!!') : null,
+                isTop ? h('span', { className: 'badge', style: { background: '#2563eb', marginLeft: '5px' } }, 'জনপ্রিয়') : null
+              )
+            ),
+            h('div', { style: { marginTop: '2rem', borderTop: '1px solid #e2e8f0', paddingTop: '1rem'} },
+              h('h3', { style: { fontSize: '1rem', fontWeight: 'bold'} }, 'বিস্তারিত বিবরণ:'),
+              h('div', { className: 'product-description' }, body)
+            )
+          );
+        }
+      });
+
+      CMS.registerPreviewTemplate("products", ProductPreview);
+    </script>
+  </body>
+</html>

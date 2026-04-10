@@ -1,0 +1,30 @@
+backend:
+  name: github
+  repo: your-username/your-repo-name # Update this with your actual repo name
+  branch: main # Change this if your default branch is different
+
+# Enable local testing
+local_backend: true
+
+media_folder: "public/images/products"
+public_folder: "/images/products"
+
+collections:
+  - name: "products"
+    label: "Products"
+    folder: "src/content/products"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Price (BDT)", name: "price", widget: "number", value_type: "int" }
+      - { label: "Product Image", name: "image", widget: "image" }
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        create: true
+        options: ["Microcontrollers", "Sensors", "Wireless", "Display", "Accessories", "Kits", "Motors"]
+      - { label: "Is Offer?", name: "isOffer", widget: "boolean", default: false }
+      - { label: "Show in Top Section?", name: "isTop", widget: "boolean", default: false }
+      - { label: "Date Added", name: "dateAdded", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Body", name: "body", widget: "markdown" }

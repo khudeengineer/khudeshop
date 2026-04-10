@@ -1,0 +1,126 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+import ProductCard from '../../components/ProductCard.astro';
+
+export async function getStaticPaths() {
+  const products = await getCollection('products');
+  return products.map(product => ({
+    params: { slug: product.id },
+    props: { product },
+  }));
+}
+
+const { product } = Astro.props;
+const { title, price, image, category, isOffer, description } = product.data;
+const { Content } = await render(product);
+
+const allProducts = await getCollection('products');
+const relatedProducts = allProducts
+  .filter(p => p.data.category === category && p.id !== product.id)
+  .slice(0, 4);
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+    <!-- Breadcrumbs -->
+    <nav class="flex mb-8 text-sm font-bold uppercase tracking-widest text-slate-400" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2">
+        <li><a href="/" class="hover:text-brand-blue transition-colors">হোম</a></li>
+        <li class="flex items-center">
+          <svg class="h-4 w-4 mx-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+          <a href="/products" class="hover:text-brand-blue transition-colors">প্রোডাক্টস</a>
+        </li>
+        <li class="flex items-center text-slate-900 dark:text-white">
+          <svg class="h-4 w-4 mx-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+          <span>{title}</span>
+        </li>
+      </ol>
+    </nav>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-24">
+      <!-- Product Image -->
+      <div class="sticky top-28 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 p-8 rounded-[3rem] shadow-premium animate-in fade-in slide-in-from-left duration-700">
+        <div class="aspect-square rounded-[2rem] overflow-hidden bg-slate-50 dark:bg-slate-900 relative">
+          <img src={image} alt={title} class="w-full h-full object-cover" />
+          {isOffer && (
+             <div class="absolute top-6 left-6 bg-brand-green text-white font-black px-6 py-2 rounded-full shadow-lg">অফার</div>
+          )}
+        </div>
+      </div>
+
+      <!-- Product Info -->
+      <div class="animate-in fade-in slide-in-from-right duration-700">
+        <div class="mb-6">
+          <span class="inline-block bg-brand-blue/10 dark:bg-brand-blue/20 text-brand-blue text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-[0.2em] mb-4">{category}</span>
+          <h1 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white leading-tight mb-4">{title}</h1>
+          <div class="flex items-center gap-1 text-yellow-500 mb-6">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+            <svg class="w-5 h-5 fill-current opacity-30" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+            <span class="text-slate-400 text-sm font-bold ml-2">(৪.৫/৫ রেটিং)</span>
+          </div>
+        </div>
+
+        <div class="mb-10 p-6 bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800 rounded-[2rem]">
+          <div class="flex items-baseline gap-2 mb-2">
+            <span class="text-sm font-bold text-slate-500 dark:text-slate-400">মূল্য:</span>
+            <span class="text-4xl font-black text-slate-900 dark:text-white leading-none">৳{price}</span>
+          </div>
+          <p class="text-brand-green font-bold text-sm">✓ স্টকে আছে</p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4 mb-12">
+          <button 
+            class="btn-add-cart flex-1 bg-brand-blue hover:bg-brand-blue-hover text-white px-8 py-5 rounded-2xl font-black text-lg transition-all shadow-lg shadow-brand-blue/20 hover:shadow-brand-blue/40 flex items-center justify-center gap-3 active:scale-95"
+            data-id={product.id}
+            data-title={title}
+            data-price={price}
+            data-image={image}
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
+            কার্টে যোগ করুন
+          </button>
+          
+          <button 
+            class="btn-buy-wp flex-1 bg-brand-green hover:bg-brand-green-hover text-white px-8 py-5 rounded-2xl font-black text-lg transition-all shadow-lg shadow-brand-green/20 hover:shadow-brand-green/40 flex items-center justify-center gap-3 active:scale-95"
+            data-title={title}
+            data-price={price}
+          >
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.964 9.964 0 001.333 4.993L2 22l5.233-1.237a9.994 9.994 0 004.779 1.217h.004c5.505 0 9.988-4.478 9.989-9.984 0-2.669-1.037-5.176-2.926-7.066A9.92 9.92 0 0012.012 2zm5.836 14.161c-.244.686-1.428 1.341-1.954 1.4-2.825.32-6.57-2.126-8.232-4.22-.163-.207-1.954-2.614-1.954-4.994 0-2.38 1.246-3.565 1.688-4.007.442-.442 1.212-.52 1.66-.54h.346c.358 0 .84.053 1.156.842.348.868 1.2 3.023 1.3 3.256.103.23.187.525.04.821-.144.298-.22.483-.437.733-.217.25-.455.549-.652.75-.218.225-.445.474-.194.908.252.434 1.121 1.85 2.404 2.997 1.656 1.48 3.056 1.942 3.504 2.152.449.21.71.166.974-.112.264-.277 1.144-1.328 1.448-1.782.304-.455.607-.379 1.015-.227.408.152 2.58 1.214 3.021 1.436.442.221.737.333.844.52.107.185.107 1.066-.137 1.75z"/></svg>
+            অর্ডার দিন
+          </button>
+        </div>
+
+        <div class="prose prose-slate max-w-none">
+          <h3 class="text-xl font-black mb-4 flex items-center gap-2 dark:text-white">
+             <svg class="w-6 h-6 text-brand-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+             প্রোডাক্ট ডিটেইলস
+          </h3>
+          <div class="text-slate-600 dark:text-slate-300 font-medium leading-relaxed space-y-4">
+             <Content />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Related Products -->
+    {relatedProducts.length > 0 && (
+      <section>
+        <div class="flex items-end justify-between mb-12">
+          <div>
+            <span class="inline-block bg-brand-blue/10 dark:bg-brand-blue/20 text-brand-blue text-xs font-black px-4 py-1.5 rounded-full mb-4 uppercase tracking-[0.2em]">You may also like</span>
+            <h2 class="text-4xl font-black text-slate-900 dark:text-white leading-tight">সম্পর্কিত <span class="text-brand-blue">প্রোডাক্টস</span></h2>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {relatedProducts.map(p => (
+            <ProductCard product={p} />
+          ))}
+        </div>
+      </section>
+    )}
+  </div>
+</BaseLayout>

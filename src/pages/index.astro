@@ -1,0 +1,129 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { getCollection } from 'astro:content';
+
+const products = await getCollection('products');
+
+const offerProducts = products.filter(p => p.data.isOffer).slice(0, 4);
+const topProducts = products.filter(p => p.data.isTop).slice(0, 4);
+const latestProducts = products.sort((a, b) => b.data.dateAdded.valueOf() - a.data.dateAdded.valueOf()).slice(0, 4);
+---
+
+<BaseLayout title="হোম">
+  <!-- Hero Section -->
+  <section class="relative pt-20 pb-32 overflow-hidden bg-slate-900">
+    <!-- Animated background circles -->
+    <div class="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-[600px] h-[600px] bg-brand-blue/20 rounded-full blur-[120px]"></div>
+    <div class="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-brand-green/10 rounded-full blur-[100px]"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 mb-8 animate-in fade-in slide-in-from-bottom duration-500">
+            <span class="w-2 h-2 bg-brand-green rounded-full animate-pulse"></span>
+            <span class="text-white text-sm font-bold uppercase tracking-widest leading-none">নতুন কিটস অ্যাভেলেবল!</span>
+          </div>
+          <h1 class="text-5xl md:text-7xl font-black text-white mb-8 leading-[1.1] animate-in fade-in slide-in-from-bottom duration-700 delay-100">
+            উদ্ভাবনের শুরু <br/>
+            <span class="bg-clip-text text-transparent bg-gradient-to-r from-brand-blue to-teal-400">এইখান থেকেই!</span>
+          </h1>
+          <p class="text-xl text-slate-300 mb-10 max-w-xl animate-in fade-in slide-in-from-bottom duration-700 delay-200">
+             ক্ষুদে ইঞ্জিনিয়ার একাডেমিতে আপনি পাবেন মানসম্মত রোবটিক্স এবং ইলেকট্রনিক্স পার্টস। আমাদের সাথে শুরু করুন আপনার প্রথম প্রজেক্ট।
+          </p>
+          <div class="flex flex-wrap gap-4 animate-in fade-in slide-in-from-bottom duration-700 delay-300">
+            <a href="/products" class="bg-brand-blue hover:bg-brand-blue-hover text-white px-10 py-5 rounded-2xl font-black text-lg shadow-lg shadow-brand-blue/20 hover:shadow-brand-blue/40 transition-all hover:-translate-y-1">কিনতে শুরু করুন</a>
+            <a href="/about" class="bg-white/5 hover:bg-white/10 text-white border border-white/10 px-10 py-5 rounded-2xl font-black text-lg backdrop-blur-sm transition-all hover:-translate-y-1">আমাদের সম্পর্কে</a>
+          </div>
+        </div>
+        
+        <div class="relative hidden lg:block animate-in fade-in zoom-in duration-1000 delay-200">
+          <div class="bg-gradient-to-br from-brand-blue to-cyan-500 rounded-[4rem] aspect-square flex items-center justify-center p-12 overflow-hidden animate-float">
+             <div class="bg-white/10 backdrop-blur-2xl w-full h-full rounded-[3rem] border border-white/20 flex flex-col items-center justify-center text-white text-center p-8">
+                <div class="w-32 h-32 bg-white rounded-3xl flex items-center justify-center mb-6 shadow-2xl rotate-3">
+                  <svg class="w-16 h-16 text-brand-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <h3 class="text-3xl font-black mb-2">৫০০+ প্রজেক্ট গাইড</h3>
+                <p class="text-lg opacity-80 font-medium">আপনার কল্পনার রোবট তৈরি করুন আমাদের সাপোর্ট নিয়ে।</p>
+             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="py-24 bg-white dark:bg-slate-900 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div class="p-8 rounded-3xl bg-slate-50 dark:bg-slate-800 hover-lift group border border-slate-100 dark:border-slate-700">
+          <div class="w-16 h-16 bg-brand-blue/10 dark:bg-brand-blue/20 rounded-2xl flex items-center justify-center text-brand-blue mb-6 group-hover:scale-110 transition-transform">
+             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+          </div>
+          <h3 class="text-xl font-bold mb-4 dark:text-white">অরিজিনাল প্রোডাক্টস</h3>
+          <p class="text-slate-600 dark:text-slate-400 leading-relaxed font-medium">আমরা সরাসরি ইম্পোর্টেড হাই-কোয়ালিটি রোবটিক্স এবং ইলেকট্রনিক্স পার্টস সরবরাহ করি।</p>
+        </div>
+        
+        <div class="p-8 rounded-3xl bg-slate-50 dark:bg-slate-800 hover-lift group border border-slate-100 dark:border-slate-700">
+          <div class="w-16 h-16 bg-brand-green/10 dark:bg-brand-green/20 rounded-2xl flex items-center justify-center text-brand-green mb-6 group-hover:scale-110 transition-transform">
+             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          </div>
+          <h3 class="text-xl font-bold mb-4 dark:text-white">দ্রুত ডেলিভারি</h3>
+          <p class="text-slate-600 dark:text-slate-400 leading-relaxed font-medium">সারাদেশে ২-৩ কার্যদিবসের মধ্যে আপনার কাঙ্ক্ষিত প্রোডাক্ট হাতে পৌঁছে দেওয়ার নিশ্চয়তা।</p>
+        </div>
+        
+        <div class="p-8 rounded-3xl bg-slate-50 dark:bg-slate-800 hover-lift group border border-slate-100 dark:border-slate-700">
+          <div class="w-16 h-16 bg-yellow-100 dark:bg-yellow-900/30 rounded-2xl flex items-center justify-center text-yellow-600 dark:text-yellow-400 mb-6 group-hover:scale-110 transition-transform">
+             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+          </div>
+          <h3 class="text-xl font-bold mb-4 dark:text-white">বিশেযজ্ঞ সাপোর্ট</h3>
+          <p class="text-slate-600 dark:text-slate-400 leading-relaxed font-medium">প্রজেক্ট তৈরি করতে গিয়ে কোনো সমস্যায় পড়লে আমাদের বিলেষজ্ঞ টিম আপনাকে সাহায্য করবে।</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-24">
+    
+    <!-- Offer Products -->
+    {offerProducts.length > 0 && (
+      <section>
+        <div class="flex items-end justify-between mb-12">
+          <div>
+            <span class="inline-block bg-brand-green/10 dark:bg-brand-green/20 text-brand-green text-xs font-black px-4 py-1.5 rounded-full mb-4 uppercase tracking-[0.2em]">Hot Deals</span>
+            <h2 class="text-4xl font-black text-slate-900 dark:text-white leading-tight">অফার <span class="text-brand-green">প্রোডাক্টস</span></h2>
+          </div>
+          <a href="/products?filter=offer" class="group flex items-center gap-2 text-brand-blue font-bold hover:gap-4 transition-all pb-2">
+            সব দেখুন <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+          </a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {offerProducts.map(product => (
+            <ProductCard product={product} />
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- Top Products -->
+    {topProducts.length > 0 && (
+      <section>
+        <div class="flex items-end justify-between mb-12">
+          <div>
+            <span class="inline-block bg-brand-blue/10 dark:bg-brand-blue/20 text-brand-blue text-xs font-black px-4 py-1.5 rounded-full mb-4 uppercase tracking-[0.2em]">Top Sellers</span>
+            <h2 class="text-4xl font-black text-slate-900 dark:text-white leading-tight">টপ <span class="text-brand-blue">প্রোডাক্টস</span></h2>
+          </div>
+          <a href="/products?filter=top" class="group flex items-center gap-2 text-brand-blue font-bold hover:gap-4 transition-all pb-2">
+            সব দেখুন <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+          </a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {topProducts.map(product => (
+            <ProductCard product={product} />
+          ))}
+        </div>
+      </section>
+    )}
+
+  </div>
+</BaseLayout>
